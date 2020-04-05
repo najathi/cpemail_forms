@@ -1,0 +1,11 @@
+.NotFoundPage{
+	display: flex;
+	margin: 5rem;
+	align-items: center;
+	justify-content: center;
+	align-content: center;
+}
+
+.NotFoundPage h1 {
+	font-weight: 900;
+}

@@ -1,0 +1,15 @@
+.EmailCard {
+	width: 100%
+}
+
+.sub {
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.fixed {
+  position: fixed;
+}
+.height--nav {
+  height: 2.8rem; 
+}
