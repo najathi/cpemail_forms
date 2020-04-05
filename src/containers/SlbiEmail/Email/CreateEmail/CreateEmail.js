@@ -8,6 +8,12 @@ const CreateEmail = props => {
 
 	useEffect(() => {
 		fetch('http://slbi.lk/rest-api/emailAccounts2.php')
+			.then(response => {
+				if (response.status !== 200) {
+					throw new Error("Failed to fetch status");
+				}
+				return response.json();
+			})
 			.then(response => console.log(response))
 			.catch(() => console.log("Can’t access ", 'url', " response. Blocked by browser?"));
 	});
@@ -36,7 +42,7 @@ const CreateEmail = props => {
 						<option value=".sr">Seller / Product Introducer</option>
 					</select>
 					<div className="mt-4">
-						<MDBBtn color="indigo" onClick={() => { }}>Add Email</MDBBtn>
+						<MDBBtn color="indigo" onClick={() => { }}>Create an Account</MDBBtn>
 					</div>
 				</form>
 			</div>

@@ -1,15 +1,22 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import './App.css';
 import SlbiEmail from './containers/SlbiEmail/SlbiEmail';
+
+import Email from './containers/SlbiEmail/Email/Email';
+import CreateEmail from './containers/SlbiEmail/Email/CreateEmail/CreateEmail';
+import Docs from './components/Docs/Docs';
 
 function App() {
   return (
     < BrowserRouter >
-      <div className=".App">
-        <SlbiEmail />
-      </div>
+      <SlbiEmail />
+      <Switch>
+        <Route path="/bulk-email/" component={Email} />
+        <Route path="/create-email/" component={CreateEmail} />
+        <Route path="/" component={Docs} exact />
+        <Route exact render={() => <div className="NotFoundPage"><h1>Not Found</h1></div>} />
+      </Switch>
     </ BrowserRouter>
   );
 }
