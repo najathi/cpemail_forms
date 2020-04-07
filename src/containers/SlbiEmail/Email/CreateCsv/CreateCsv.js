@@ -53,8 +53,7 @@ const CreateCSV = props => {
 	});
 
 	useEffect(() => {
-		// const url = '/emails.php';
-		const url = 'http://email.slbi.lk/api/emails.php';
+		const url = '/emails.php';
 		axios.get(url).then(response => response.data)
 			.then((data) => {
 				const emails = data.map(responseEmail => {

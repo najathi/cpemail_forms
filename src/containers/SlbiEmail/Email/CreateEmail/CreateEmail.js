@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MDBCol, MDBBtn } from 'mdbreact';
 import axios from '../../../../axios-emails';
-import Clipboard from 'react-clipboard.js';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import Input from '../../../../components/UI/Input/Input';
@@ -9,7 +8,6 @@ import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Alert from '../../../../components/UI/Alert/Alert';
 import Aux from '../../../../hoc/Auxiliary/Auxiliary';
-import ClipboardButton from 'react-clipboard.js';
 
 const CreateEmail = props => {
 
@@ -62,8 +60,7 @@ const CreateEmail = props => {
 	const [copy, setCopy] = useState(false);
 
 	useEffect(() => {
-		// const url = '/emails.php';
-		const url = 'http://email.slbi.lk/api/emails.php';
+		const url = '/emails.php';
 		axios.get(url).then(response => response.data)
 			.then((data) => {
 				const emails = data.map(responseEmail => {
