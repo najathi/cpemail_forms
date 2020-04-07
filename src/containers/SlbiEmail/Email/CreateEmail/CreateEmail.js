@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { MDBCol } from 'mdbreact';
-import axios from 'axios';
+import { MDBCol, MDBBtn } from 'mdbreact';
+import axios from '../../../../axios-emails';
+import Clipboard from 'react-clipboard.js';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
+import Alert from '../../../../components/UI/Alert/Alert';
+import Aux from '../../../../hoc/Auxiliary/Auxiliary';
+import ClipboardButton from 'react-clipboard.js';
 
 const CreateEmail = props => {
 
@@ -51,9 +56,14 @@ const CreateEmail = props => {
 	const [formErrors, setFormErrors] = useState({
 		email: "",
 	});
+	const [success, setSuccess] = useState(false);
+	const [danger, setDanger] = useState(false);
+	const [emailCopy, setEmailCopy] = useState('');
+	const [copy, setCopy] = useState(false);
 
 	useEffect(() => {
-		const url = 'http://slbi.lk/rest-api/emailAccounts2.php';
+		// const url = '/emails.php';
+		const url = 'http://email.slbi.lk/api/emails.php';
 		axios.get(url).then(response => response.data)
 			.then((data) => {
 				const emails = data.map(responseEmail => {
@@ -65,7 +75,7 @@ const CreateEmail = props => {
 				});
 				setEmails(emails);
 			}).catch(error => console.log(error));
-	});
+	}, [emailForm]);
 
 	const resetFormInput = () => {
 		setEmailForm({
@@ -109,29 +119,44 @@ const CreateEmail = props => {
 
 	const emailAddedHandler = event => {
 		event.preventDefault();
+		setLoading(true);
 		const formData = {};
 		for (let formElementIdentifier in emailForm) {
 			formData[formElementIdentifier] = emailForm[formElementIdentifier].value.trim();
 		}
-		axios.post('http://localhost/cpmail_api/', formData)
+		axios.post('/create-email.php', formData, {
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+		})
 			.then(response => {
 				setLoading(false);
 				console.log(response);
+				setEmailCopy(response.data.email);
+				setSuccess(true);
+				setDanger(false);
 				resetFormInput();
+				setTimeout(() => {
+					setSuccess(false);
+				}, 10000);
 				// props.history.push('/');
 			})
 			.catch(error => {
 				setLoading(false);
 				console.log(error);
+				setDanger(true);
+				setSuccess(false);
+				setTimeout(() => {
+					setDanger(false);
+				}, 10000);
 			});
 	}
+
+	// console.log(success);
+	// console.log(danger);
 
 	const checkValidity = (value, rules) => {
 		let isValid = true;
 
 		const arrEmails = [...emails];
-
-		let simple;
 
 		if (!rules) {
 			return true;
@@ -152,8 +177,6 @@ const CreateEmail = props => {
 		if (!isValid) {
 			setFormErrors({ email: 'Invalid Email Name' });
 		}
-
-		console.log(simple);
 
 		return isValid;
 	}
@@ -209,18 +232,34 @@ const CreateEmail = props => {
 					formErrors={formErrors}
 					changed={(event) => inputChangedHandler(event, formElement.id)} />
 			))}
-			<Button btnType="Default" color="indigo" disabled={!formIsValid}>Add Email</Button>
+			<Button btnType="Default" color="indigo" disabled={!formIsValid} style={{ marginBottom: '1.5rem' }}>Add Email</Button>
 		</form>);
 
 	if (loading) {
 		form = <Spinner />
 	}
 
+	let alertMessage = null;
+	if (success) {
+		alertMessage = <Alert alertType="success" text="Email Account was created" />;
+	} else if (danger) {
+		alertMessage = <Alert alertType="danger" text="Unable to create email account" />;
+	}
+
 	return (
 		<MDBCol lg="12">
 			<MDBCol md="6">
 				<div style={{ padding: '2rem', textAlign: 'left' }}>
+					{alertMessage}
+					<h4 style={{ marginBottom: '1rem', fontWeight: 'bold' }}>Create an Email Account</h4>
 					{form}
+
+					{emailCopy !== '' && <Aux>
+						<span style={{ marginTop: '3rem', marginBottom: '2rem', marginRight: '2rem' }}>{emailCopy}</span>
+						<CopyToClipboard text={emailCopy} button-title="Copy">
+							<MDBBtn color="info" onClick={() => setCopy(true)}>{copy ? 'Copied' : 'Copy text'}</MDBBtn>
+						</CopyToClipboard>
+					</Aux>}
 				</div>
 			</MDBCol>
 		</MDBCol>

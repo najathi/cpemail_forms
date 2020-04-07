@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MDBCol } from 'mdbreact';
-import axios from 'axios';
+import axios from '../../../../axios-emails';
 
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
@@ -53,7 +53,8 @@ const CreateCSV = props => {
 	});
 
 	useEffect(() => {
-		const url = 'http://slbi.lk/rest-api/emailAccounts2.php';
+		// const url = '/emails.php';
+		const url = 'http://email.slbi.lk/api/emails.php';
 		axios.get(url).then(response => response.data)
 			.then((data) => {
 				const emails = data.map(responseEmail => {
@@ -65,7 +66,7 @@ const CreateCSV = props => {
 				});
 				setEmails(emails);
 			}).catch(error => console.log(error));
-	});
+	}, [emailForm]);
 
 	const resetFormInput = () => {
 		setEmailForm({
@@ -212,7 +213,8 @@ const CreateCSV = props => {
 	return (
 		<MDBCol lg="12">
 			<MDBCol md="6">
-				<div style={{ padding: '2rem', textAlign: 'left' }}>
+				<div style={{ padding: '2rem', textAlign: 'left', marginBottom: '1rem' }}>
+					<h4 style={{ marginBottom: '1rem', fontWeight: 'bold' }}>Create Bulk Email Accounts</h4>
 					{form}
 				</div>
 			</MDBCol>
