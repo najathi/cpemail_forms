@@ -16,7 +16,7 @@ function App() {
         <Route path="/bulk-email/" component={Email} />
         <Route path="/create-email/" component={CreateEmail} />
         <Route path="/" component={Docs} exact />
-        <Route exact render={() => <div className="NotFoundPage"><h1>Not Found</h1></div>} />
+        <Route path='*' exact={true} render={() => <div className="NotFoundPage"><h1>Not Found</h1></div>} />
       </Switch>
     </ BrowserRouter>
   );
