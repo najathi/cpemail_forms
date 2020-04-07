@@ -10,8 +10,8 @@ const Email = props => {
 	const [emailAddress, setEmailAddress] = useState([]);
 
 	const addEmailHandler = (email) => {
-		let emailArr = { Email: email, Password: 'slbi@2020', Quota: '' };
-		setEmailAddress(emailAddress.concat(emailArr));
+		let emailObj = { Email: email, Password: 'slbi@2020', Quota: '' };
+		setEmailAddress(emailAddress.concat(emailObj));
 	}
 
 	const deleteHandler = (index, e) => {

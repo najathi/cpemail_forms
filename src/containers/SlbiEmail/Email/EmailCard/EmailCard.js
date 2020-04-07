@@ -7,13 +7,17 @@ import './EmailCard.css';
 
 const CardExample = props => {
 
+	const emails = props.email.filter((item, index) => props.email.indexOf(item) === index);
+
+	console.log(emails[0]);
+
 	return (
 		<MDBCol lg="6" md="6" style={{ marginTop: "1rem" }} >
 			<MDBCard className="EmailCard">
 				<MDBCardBody>
 					<MDBCardTitle>Adding Email Addresses</MDBCardTitle>
 					<MDBTable responsive>
-						<MDBTableHead class="grey lighten-2">
+						<MDBTableHead className="grey lighten-2">
 							<tr>
 								<th scope="col">#</th>
 								<th scope="col">Email Address</th>
@@ -22,13 +26,13 @@ const CardExample = props => {
 							</tr>
 						</MDBTableHead>
 						<MDBTableBody>
-							{props.email.map((emailAddress, index) => {
+							{emails.map((emailAddress, index) => {
 								return (
 									<tr key={index}>
 										<th scope="row">{index + 1}</th>
 										<td>{emailAddress.Email}</td>
 										<td>{emailAddress.Password}</td>
-										<td><div onClick={props.deleteEmail.bind(this, index)}><i class="fas fa-trash-alt" style={{ color: 'red', cursor: 'pointer' }}></i></div></td>
+										<td><div onClick={props.deleteEmail.bind(this, index)}><i className="fas fa-trash-alt" style={{ color: 'red', cursor: 'pointer' }}></i></div></td>
 									</tr>
 								)
 							})}
