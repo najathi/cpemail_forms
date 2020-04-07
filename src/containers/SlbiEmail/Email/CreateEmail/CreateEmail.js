@@ -152,6 +152,7 @@ const CreateEmail = props => {
 
 	const checkValidity = (value, rules) => {
 		let isValid = true;
+		setEmailCopy('');
 
 		const arrEmails = [...emails];
 
