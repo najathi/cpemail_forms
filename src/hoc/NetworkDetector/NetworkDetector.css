@@ -1,0 +1,12 @@
+.internet-error{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgb(219, 95, 95);
+	padding: 1rem;
+}
+
+.internet-error p{
+	color: #fff;
+	font-size: 1.5rem;
+}

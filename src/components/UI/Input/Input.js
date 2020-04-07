@@ -15,6 +15,16 @@ const Input = props => {
 	switch (props.elementType) {
 		case ('input'):
 			inputElement = (
+				<input
+					className={inputClasses.join(' ')}
+					{...props.elementConfig}
+					name={props.name}
+					value={props.value}
+					onChange={props.changed} />
+			);
+			break;
+		case ('input-group'):
+			inputElement = (
 				<React.Fragment >
 					<div className="input-group">
 						<input
@@ -59,21 +69,13 @@ const Input = props => {
 			break;
 		default:
 			inputElement = (
-				<React.Fragment>
-					<input
-						className={inputClasses.join(' ')}
-						{...props.elementConfig}
-						name={props.name}
-						value={props.value}
-						onChange={props.changed} />
-
-					{
-						props.formErrors.email.length > 0 && (
-							<span className={classes.errorMessage}>{props.formErrors.email}</span>
-						)
-					}
-				</React.Fragment>
-			)
+				<input
+					className={inputClasses.join(' ')}
+					{...props.elementConfig}
+					name={props.name}
+					value={props.value}
+					onChange={props.changed} />
+			);
 	}
 
 	return (

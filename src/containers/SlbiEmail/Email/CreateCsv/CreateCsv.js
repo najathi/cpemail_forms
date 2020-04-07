@@ -11,7 +11,7 @@ const CreateCSV = props => {
 	const [emailForm, setEmailForm] = useState({
 		email: {
 			label: 'E-Mail Name',
-			elementType: 'input',
+			elementType: 'input-group',
 			elementConfig: {
 				type: 'text',
 				placeholder: 'Your E-Mail Name',
@@ -176,7 +176,7 @@ const CreateCSV = props => {
 	return (
 		<MDBCol lg="12">
 			<MDBCol md="6">
-				<div className="createForm" style={{ padding: '2rem', textAlign: 'left' }}>
+				<div style={{ padding: '2rem', textAlign: 'left' }}>
 					{form}
 				</div>
 			</MDBCol>

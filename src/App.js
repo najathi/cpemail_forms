@@ -6,6 +6,7 @@ import SlbiEmail from './containers/SlbiEmail/SlbiEmail';
 import Email from './containers/SlbiEmail/Email/Email';
 import CreateEmail from './containers/SlbiEmail/Email/CreateEmail/CreateEmail';
 import Docs from './components/Docs/Docs';
+import NetworkDetector from './hoc/NetworkDetector/NetworkDetector'
 
 function App() {
   return (
@@ -21,4 +22,4 @@ function App() {
   );
 }
 
-export default App;
+export default NetworkDetector(App);
