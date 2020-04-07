@@ -68,7 +68,43 @@ const CreateCSV = props => {
 	});
 
 	const resetFormInput = () => {
-		setEmailForm(emailForm);
+		setEmailForm({
+			email: {
+				label: 'E-Mail Name',
+				elementType: 'input-group',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Your E-Mail Name',
+				},
+				value: '',
+				validation: {
+					required: true,
+					filter: true,
+				},
+				errorMsg: '',
+				valid: false,
+				touched: false
+			},
+			designation: {
+				label: 'Designation',
+				elementType: 'select',
+				elementConfig: {
+					options: [
+						{ value: '.sr', displayValue: 'Seller / Product Introducer' },
+						{ value: '.am', displayValue: 'Associate Manager' },
+						{ value: '.adm', displayValue: 'Area Manager' },
+						{ value: '.asdm', displayValue: 'Associate District Manager' },
+						{ value: '.dm', displayValue: 'District Manager' },
+						{ value: '.adtr', displayValue: 'Associate Director' },
+						{ value: '.dtr', displayValue: 'Director' },
+						{ value: '.cf', displayValue: 'Co-Founder' },
+					]
+				},
+				value: '.sr', // default Value
+				validation: {},
+				valid: true
+			},
+		});
 	}
 
 	const emailAddedHandler = event => {
