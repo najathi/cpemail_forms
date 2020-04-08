@@ -185,7 +185,7 @@ const CreateEmail = props => {
 		console.log(event.target);
 
 		const updatedFormElement = { ...updatedOrderForm[inputIdentifier] };
-		updatedFormElement.value = event.target.value;
+		updatedFormElement.value = event.target.value.trim().toLowerCase();
 		updatedFormElement.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
 		updatedFormElement.touched = true;
 		updatedOrderForm[inputIdentifier] = updatedFormElement;
@@ -223,7 +223,7 @@ const CreateEmail = props => {
 					elementType={formElement.config.elementType}
 					elementConfig={formElement.config.elementConfig}
 					label={formElement.config.label}
-					value={formElement.config.value}
+					value={formElement.config.value.trim().toLowerCase()}
 					invalid={!formElement.config.valid}
 					shouldValidate={formElement.config.validation}
 					touched={formElement.config.touched}

@@ -38,7 +38,7 @@ const CardExample = props => {
 							})}
 						</MDBTableBody>
 					</MDBTable>
-					<CSVLink data={props.email} filename="SLBI-Email.xls"><MDBBtn color="dark"><MDBIcon icon="download" /> Download</MDBBtn></CSVLink>
+					<CSVLink data={props.email} filename="SLBI-Email.csv"><MDBBtn color="dark"><MDBIcon icon="download" /> Download</MDBBtn></CSVLink>
 				</MDBCardBody>
 			</MDBCard>
 		</MDBCol >
