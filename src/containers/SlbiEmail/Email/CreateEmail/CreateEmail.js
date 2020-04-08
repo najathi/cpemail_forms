@@ -230,7 +230,7 @@ const CreateEmail = props => {
 					formErrors={formErrors}
 					changed={(event) => inputChangedHandler(event, formElement.id)} />
 			))}
-			<Button btnType="Default" color="indigo" disabled={!formIsValid} style={{ marginBottom: '1.5rem' }}>Add Email</Button>
+			<Button btnType="Default" color="indigo" disabled={!formIsValid} style={{ marginBottom: '3rem' }}>Add Email</Button>
 		</form>);
 
 	if (loading) {
@@ -251,13 +251,14 @@ const CreateEmail = props => {
 					{alertMessage}
 					<h4 style={{ marginBottom: '1rem', fontWeight: 'bold' }}>Create an Email Account</h4>
 					{form}
-
-					{emailCopy !== '' && <Aux>
-						<span style={{ marginTop: '3rem', marginBottom: '2rem', marginRight: '2rem' }}>{emailCopy}</span>
-						<CopyToClipboard text={emailCopy} button-title="Copy">
-							<MDBBtn color="info" onClick={() => setCopy(true)}>{copy ? 'Copied' : 'Copy text'}</MDBBtn>
-						</CopyToClipboard>
-					</Aux>}
+					<MDBCol md="6" style={{ marginTop: '2rem' }}>
+						{emailCopy !== '' && <Aux>
+							<span style={{ marginTop: '3rem', marginBottom: '2rem', marginRight: '2rem' }}><b>{emailCopy}</b></span>
+							<CopyToClipboard text={emailCopy + '  -  slbi@2020'} button-title="Copy">
+								<MDBBtn color="light" onClick={() => setCopy(true)}>{copy ? <i class="fas fa-clipboard-check fa-lg red-text"></i> : <i class="fas fa-clipboard fa-lg black-text"></i>}</MDBBtn>
+							</CopyToClipboard>
+						</Aux>}
+					</MDBCol>
 				</div>
 			</MDBCol>
 		</MDBCol>
