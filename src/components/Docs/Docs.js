@@ -1,5 +1,6 @@
 import React from "react";
-import { MDBCard, MDBNavLink } from "mdbreact";
+import { NavLink } from 'react-router-dom';
+import { MDBCard, MDBNavLink, MDBIcon } from "mdbreact";
 
 const Docs = (props) => {
 
@@ -27,15 +28,21 @@ const Docs = (props) => {
 									</div>
 								</section>
 								<section id="download-section" className="doc-section" style={{ marginTop: '2rem' }}>
-									<h5 className="section-title">Create an Email Account</h5>
+									<h5 className="section-title">Create an Email Account
+									<NavLink to="/create-email/">
+											<MDBIcon style={{ marginLeft: '5px', cursor: 'pointer' }} icon="external-link-alt" />
+										</NavLink></h5>
 									<div className="section-block">
 										<p>This feature, you can add an email account one by one</p>
 									</div>
 								</section>
 								<section id="download-section" className="doc-section" style={{ marginTop: '2rem' }}>
-									<h5 className="section-title">Create Bulk Email Accounts</h5>
+									<h5 className="section-title">Create Bulk Email Accounts
+									<NavLink to="/bulk-email/">
+											<MDBIcon style={{ marginLeft: '5px', cursor: 'pointer' }} icon="external-link-alt" />
+										</NavLink></h5>
 									<div className="section-block">
-										<p>This feature, you can add bulk email accounts. when you add email account that will create a <b>csv</b> file. After Please send the file on whatsapp to Mr. Nahaar. Nahaar will create email accounts for you.</p>
+										<p>This feature, you can add bulk email accounts. when you add email account that will create a <b>CSV</b> / <b>Excel</b> File. After Please send the file on whatsapp to Mr. Nahaar. Nahaar will create email accounts for you.</p>
 									</div>
 								</section>
 							</div>
@@ -44,7 +51,7 @@ const Docs = (props) => {
 				</div>
 			</div>
 
-		</MDBCard>
+		</MDBCard >
 	);
 }
 

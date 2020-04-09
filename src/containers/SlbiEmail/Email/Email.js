@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MDBRow } from 'mdbreact';
 
-import CreateCsv from '../Email/CreateCsv/CreateCsv';
+import CreateBulk from './CreateBulk/CreateBulk';
 import EmailCard from '../Email/EmailCard/EmailCard';
 import './Email.css';
 
@@ -28,7 +28,7 @@ const Email = props => {
 
 	return (
 		<MDBRow>
-			<CreateCsv addedEmail={addEmailHandler} />
+			<CreateBulk addedEmail={addEmailHandler} />
 			{emailAddress.length >= 1 ? <EmailCard className="card EmailCard" email={emailAddress} deleteEmail={deleteHandler} /> : ''}
 		</MDBRow>
 	);

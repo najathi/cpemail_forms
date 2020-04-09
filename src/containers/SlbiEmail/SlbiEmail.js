@@ -28,7 +28,7 @@ class NavbarPage extends Component {
 				<MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
 					<MDBNavbarNav right>
 						<MDBNavItem active>
-							<MDBNavLink to="/">Home</MDBNavLink>
+							<MDBNavLink to="" exact>Home</MDBNavLink>
 						</MDBNavItem>
 						<MDBNavItem>
 							<MDBNavLink to="/create-email/">Create an Email</MDBNavLink>

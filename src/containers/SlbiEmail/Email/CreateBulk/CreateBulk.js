@@ -6,7 +6,7 @@ import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 
-const CreateCSV = props => {
+const CreateBulk = props => {
 
 	const [emailForm, setEmailForm] = useState({
 		email: {
@@ -157,7 +157,7 @@ const CreateCSV = props => {
 		console.log(event.target);
 
 		const updatedFormElement = { ...updatedOrderForm[inputIdentifier] };
-		updatedFormElement.value = event.target.value.toLowerCase();
+		updatedFormElement.value = event.target.value;
 		updatedFormElement.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
 		updatedFormElement.touched = true;
 		updatedOrderForm[inputIdentifier] = updatedFormElement;
@@ -195,7 +195,7 @@ const CreateCSV = props => {
 					elementType={formElement.config.elementType}
 					elementConfig={formElement.config.elementConfig}
 					label={formElement.config.label}
-					value={formElement.config.value.toLowerCase()}
+					value={formElement.config.value.replace(/[^a-zA-Z ]/g, "").trim().toLowerCase()}
 					invalid={!formElement.config.valid}
 					shouldValidate={formElement.config.validation}
 					touched={formElement.config.touched}
@@ -222,4 +222,4 @@ const CreateCSV = props => {
 
 }
 
-export default CreateCSV;
+export default CreateBulk;

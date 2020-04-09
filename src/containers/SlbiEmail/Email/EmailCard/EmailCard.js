@@ -1,9 +1,13 @@
 import React from 'react';
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCol, MDBIcon, MDBTable, MDBTableHead, MDBTableBody } from 'mdbreact';
+import { MDBCard, MDBCardBody, MDBCardTitle, MDBCol, MDBIcon, MDBTable, MDBTableHead, MDBTableBody } from 'mdbreact';
 import { CSVLink } from "react-csv";
+import ReactExport from "react-export-excel";
 
 import './EmailCard.css';
 
+const ExcelFile = ReactExport.ExcelFile;
+const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
+const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
 const CardExample = props => {
 
@@ -38,7 +42,20 @@ const CardExample = props => {
 							})}
 						</MDBTableBody>
 					</MDBTable>
-					<CSVLink data={props.email} filename="SLBI-Email.csv"><MDBBtn color="dark"><MDBIcon icon="download" /> Download</MDBBtn></CSVLink>
+					<div className="downloadContainer">
+						<CSVLink data={props.email} filename="SLBI-Email.csv">
+							<MDBIcon icon="file-csv" size="2x" className="red-text" />
+						</CSVLink>
+						<ExcelFile element={
+							<MDBIcon icon="file-excel" size="2x" className="green-text" />
+						} filename="SLBI-Email">
+							<ExcelSheet data={props.email} name="Employees">
+								<ExcelColumn label="Email" value="Email" />
+								<ExcelColumn label="Password" value="Password" />
+								<ExcelColumn label="Quota" value="Quota" />
+							</ExcelSheet>
+						</ExcelFile>
+					</div>
 				</MDBCardBody>
 			</MDBCard>
 		</MDBCol >

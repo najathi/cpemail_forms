@@ -13,3 +13,9 @@
 .height--nav {
   height: 2.8rem; 
 }
+
+.downloadContainer{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
