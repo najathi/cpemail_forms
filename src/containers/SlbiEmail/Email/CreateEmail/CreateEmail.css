@@ -1,0 +1,21 @@
+.clipboardContainer{
+	display: flex;
+	flex-direction: row;
+}
+
+.clipboardText{
+	border: '1px solid black';
+	border-radius: '10px';
+	padding: '1rem';
+	margin-right: '0.5rem';
+	font-weight: 'bold'
+}
+
+.clipboardIcon{
+	padding: '1rem'; 
+	cursor: 'pointer'
+}
+
+.clipboardIcon:hover{
+	color: darkgreen;
+}

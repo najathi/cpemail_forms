@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MDBCol, MDBBtn } from 'mdbreact';
+import { MDBCol } from 'mdbreact';
 import axios from '../../../../axios-emails';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
@@ -8,6 +8,7 @@ import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Alert from '../../../../components/UI/Alert/Alert';
 import Aux from '../../../../hoc/Auxiliary/Auxiliary';
+import './CreateEmail.css';
 
 const CreateEmail = props => {
 
@@ -234,7 +235,7 @@ const CreateEmail = props => {
 		</form>);
 
 	if (loading) {
-		form = <Spinner />
+		form = <Spinner />;
 	}
 
 	let alertMessage = null;
@@ -253,15 +254,19 @@ const CreateEmail = props => {
 					{form}
 					<MDBCol md="6" style={{ marginTop: '2rem' }}>
 						{emailCopy !== '' && <Aux>
-							<span style={{ marginTop: '3rem', marginBottom: '2rem', marginRight: '2rem' }}><b>{emailCopy}</b></span>
-							<CopyToClipboard text={emailCopy + '  -  slbi@2020'} button-title="Copy">
-								<MDBBtn color="light" onClick={() => setCopy(true)}>{copy ? <i class="fas fa-clipboard-check fa-lg red-text"></i> : <i class="fas fa-clipboard fa-lg black-text"></i>}</MDBBtn>
-							</CopyToClipboard>
+							<div className="clipboardContainer">
+								<span style={{ border: '1px solid black', borderRadius: '10px', padding: '1rem', marginRight: '0.5rem', fontWeight: 'bold' }}>{emailCopy}</span>
+								<CopyToClipboard text={emailCopy + '  -  slbi@2020'} button-title="Copy">
+									<div style={{ padding: '1rem', cursor: 'pointer', fontWeight: 'bold' }} onClick={() => setCopy(true)}>
+										{copy ? <i class="fas fa-clipboard-check fa-lg red-text"></i> : <i class="fas fa-clipboard fa-lg black-text"></i>}
+									</div>
+								</CopyToClipboard>
+							</div>
 						</Aux>}
 					</MDBCol>
 				</div>
 			</MDBCol>
-		</MDBCol>
+		</MDBCol >
 	);
 
 }
