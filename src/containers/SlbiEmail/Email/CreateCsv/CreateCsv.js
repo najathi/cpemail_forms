@@ -31,8 +31,8 @@ const CreateCSV = props => {
 			elementConfig: {
 				options: [
 					{ value: '.sr', displayValue: 'Seller / Product Introducer' },
-					{ value: '.am', displayValue: 'Associate Manager' },
-					{ value: '.adm', displayValue: 'Area Manager' },
+					{ value: '.adm', displayValue: 'Associate Manager' },
+					{ value: '.am', displayValue: 'Area Manager' },
 					{ value: '.asdm', displayValue: 'Associate District Manager' },
 					{ value: '.dm', displayValue: 'District Manager' },
 					{ value: '.adtr', displayValue: 'Associate Director' },
@@ -91,8 +91,8 @@ const CreateCSV = props => {
 				elementConfig: {
 					options: [
 						{ value: '.sr', displayValue: 'Seller / Product Introducer' },
-						{ value: '.am', displayValue: 'Associate Manager' },
-						{ value: '.adm', displayValue: 'Area Manager' },
+						{ value: '.adm', displayValue: 'Associate Manager' },
+						{ value: '.am', displayValue: 'Area Manager' },
 						{ value: '.asdm', displayValue: 'Associate District Manager' },
 						{ value: '.dm', displayValue: 'District Manager' },
 						{ value: '.adtr', displayValue: 'Associate Director' },
