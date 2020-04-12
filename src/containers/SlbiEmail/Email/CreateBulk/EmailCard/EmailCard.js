@@ -1,7 +1,7 @@
 import React from 'react';
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBCol, MDBIcon, MDBTable, MDBTableHead, MDBTableBody } from 'mdbreact';
 import { CSVLink } from "react-csv";
-import ReactExport from "react-export-excel";
+import ReactExport from "react-data-export";
 
 import './EmailCard.css';
 
@@ -47,7 +47,7 @@ const CardExample = props => {
 							<MDBIcon icon="file-csv" size="2x" className="red-text" />
 						</CSVLink>
 						<ExcelFile element={
-							<MDBIcon icon="file-excel" size="2x" className="green-text" />
+							<MDBIcon icon="file-excel" size="2x" className="green-text" style={{ cursor: 'pointer' }} />
 						} filename="SLBI-Email">
 							<ExcelSheet data={props.email} name="Employees">
 								<ExcelColumn label="Email" value="Email" />

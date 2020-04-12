@@ -6,13 +6,15 @@ import SlbiEmail from './containers/SlbiEmail/SlbiEmail';
 import Email from './containers/SlbiEmail/Email/Email';
 import CreateEmail from './containers/SlbiEmail/Email/CreateEmail/CreateEmail';
 import Docs from './components/Docs/Docs';
-import NetworkDetector from './hoc/NetworkDetector/NetworkDetector'
+import NetworkDetector from './hoc/NetworkDetector/NetworkDetector';
+import GroupEmail from './containers/SlbiEmail/Email/GroupEmail/GroupEmail';
 
 function App() {
   return (
     < BrowserRouter >
       <SlbiEmail />
       <Switch>
+        {/* <Route path="/group-email/" component={GroupEmail} /> */}
         <Route path="/bulk-email/" component={Email} />
         <Route path="/create-email/" component={CreateEmail} />
         <Route path="/" component={Docs} exact />

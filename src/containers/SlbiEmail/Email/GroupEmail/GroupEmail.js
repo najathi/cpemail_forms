@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { MDBCol } from 'mdbreact';
+import { MDBCol, MDBBtn } from 'mdbreact';
 import axios from '../../../../axios-emails';
 
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
+import Alert from '../../../../components/UI/Alert/Alert';
 
-const CreateBulk = props => {
+const GroupEmail = props => {
 
 	const [emailForm, setEmailForm] = useState({
 		email: {
-			label: 'E-Mail Name',
-			elementType: 'input-group',
+			label: 'Full Names',
+			elementType: 'textarea',
 			elementConfig: {
 				type: 'text',
-				placeholder: 'Your E-Mail Name',
+				placeholder: 'Enter Full Names',
 			},
 			value: '',
 			validation: {
@@ -51,6 +52,10 @@ const CreateBulk = props => {
 	const [formErrors, setFormErrors] = useState({
 		email: "",
 	});
+	const [success, setSuccess] = useState(false);
+	const [danger, setDanger] = useState(false);
+	const [emailCopy, setEmailCopy] = useState('');
+	const [copy, setCopy] = useState(false);
 
 	useEffect(() => {
 		const url = '/emails.php';
@@ -70,11 +75,11 @@ const CreateBulk = props => {
 	const resetFormInput = () => {
 		setEmailForm({
 			email: {
-				label: 'E-Mail Name',
-				elementType: 'input-group',
+				label: 'Full Names',
+				elementType: 'textarea',
 				elementConfig: {
 					type: 'text',
-					placeholder: 'Your E-Mail Name',
+					placeholder: 'Enter Full Names',
 				},
 				value: '',
 				validation: {
@@ -107,24 +112,24 @@ const CreateBulk = props => {
 		});
 	}
 
-	const emailAddedHandler = event => {
+	const emailSubmitHandler = event => {
 		event.preventDefault();
 		setLoading(true);
 		const formData = {};
 		for (let formElementIdentifier in emailForm) {
-			formData[formElementIdentifier] = emailForm[formElementIdentifier].value;
+			formData[formElementIdentifier] = emailForm[formElementIdentifier].value.trim();
 		}
-		props.addedEmail(formData.email + formData.designation + '@slbi.lk');
-		setLoading(false);
-		resetFormInput();
+	}
+
+	const previewHandler = event => {
+
 	}
 
 	const checkValidity = (value, rules) => {
 		let isValid = true;
+		setEmailCopy('');
 
 		const arrEmails = [...emails];
-
-		let simple;
 
 		if (!rules) {
 			return true;
@@ -145,8 +150,6 @@ const CreateBulk = props => {
 		if (!isValid) {
 			setFormErrors({ email: 'Invalid Email Name' });
 		}
-
-		console.log(simple);
 
 		return isValid;
 	}
@@ -187,39 +190,51 @@ const CreateBulk = props => {
 	}
 
 	let form = (
-		<form onSubmit={emailAddedHandler}>
-			{formElementArray.map(formElement => (
-				<Input
-					key={formElement.id}
-					name={formElement.name}
-					elementType={formElement.config.elementType}
-					elementConfig={formElement.config.elementConfig}
-					label={formElement.config.label}
-					value={formElement.config.value.replace(/\s/g, '').replace(/[^a-zA-Z ]/g, "").toLowerCase().trim()}
-					invalid={!formElement.config.valid}
-					shouldValidate={formElement.config.validation}
-					touched={formElement.config.touched}
-					formErrors={formErrors}
-					changed={(event) => inputChangedHandler(event, formElement.id)} />
-			))}
-			<Button btnType="Success" color="indigo" disabled={!formIsValid}>Add Email</Button>
-		</form>);
+		<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end' }}>
+			<form onSubmit={emailSubmitHandler}>
+				{formElementArray.map(formElement => (
+					<Input
+						key={formElement.id}
+						name={formElement.name}
+						elementType={formElement.config.elementType}
+						elementConfig={formElement.config.elementConfig}
+						label={formElement.config.label}
+						value={formElement.config.value.toLowerCase()}
+						invalid={!formElement.config.valid}
+						shouldValidate={formElement.config.validation}
+						touched={formElement.config.touched}
+						formErrors={formErrors}
+						changed={(event) => inputChangedHandler(event, formElement.id)} />
+				))}
+				<Button btnType="Default" color="indigo" disabled={!formIsValid} style={{ marginBottom: '3rem' }}>Add Email</Button>
+			</form>
+			<MDBBtn color="warning" outline rounded style={{ marginRight: '1rem', borderRadius: '20px' }}>Preview</MDBBtn>
+		</div>);
 
 	if (loading) {
-		form = <Spinner />
+		form = <Spinner />;
+	}
+
+	let alertMessage = null;
+	if (success) {
+		alertMessage = <Alert alertType="success" text="Email Account was created" />;
+	} else if (danger) {
+		alertMessage = <Alert alertType="danger" text="Unable to create email account" />;
 	}
 
 	return (
 		<MDBCol lg="12">
 			<MDBCol md="6">
-				<div style={{ padding: '2rem', textAlign: 'left', marginBottom: '1rem' }}>
-					<h4 style={{ marginBottom: '1rem', fontWeight: 'bold' }}>Create Bulk Email Accounts</h4>
+				<div style={{ padding: '2rem 1rem', textAlign: 'left' }}>
+					{alertMessage}
+					<h4 style={{ marginBottom: '1rem', fontWeight: 'bold' }}>Create Group Email Accounts</h4>
 					{form}
+					<MDBCol style={{ marginTop: '2rem' }}>
+					</MDBCol>
 				</div>
 			</MDBCol>
-		</MDBCol>
+		</MDBCol >
 	);
-
 }
 
-export default CreateBulk;
+export default GroupEmail;

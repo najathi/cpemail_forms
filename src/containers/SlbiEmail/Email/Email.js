@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MDBRow } from 'mdbreact';
 
 import CreateBulk from './CreateBulk/CreateBulk';
-import EmailCard from '../Email/EmailCard/EmailCard';
+import EmailCard from './CreateBulk/EmailCard/EmailCard';
 import './Email.css';
 
 const Email = props => {

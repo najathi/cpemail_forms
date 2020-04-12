@@ -224,7 +224,7 @@ const CreateEmail = props => {
 					elementType={formElement.config.elementType}
 					elementConfig={formElement.config.elementConfig}
 					label={formElement.config.label}
-					value={formElement.config.value.replace(/[^a-zA-Z ]/g, "").trim().toLowerCase()}
+					value={formElement.config.value.replace(/\s/g, '').replace(/[^a-zA-Z ]/g, "").toLowerCase().trim()}
 					invalid={!formElement.config.valid}
 					shouldValidate={formElement.config.validation}
 					touched={formElement.config.touched}
@@ -248,16 +248,16 @@ const CreateEmail = props => {
 	return (
 		<MDBCol lg="12">
 			<MDBCol md="6">
-				<div style={{ padding: '2rem', textAlign: 'left' }}>
+				<div style={{ padding: '2rem 1rem', textAlign: 'left' }}>
 					{alertMessage}
 					<h4 style={{ marginBottom: '1rem', fontWeight: 'bold' }}>Create an Email Account</h4>
 					{form}
-					<MDBCol md="6" style={{ marginTop: '2rem' }}>
+					<MDBCol style={{ marginTop: '2rem' }}>
 						{emailCopy !== '' && <Aux>
 							<div className="clipboardContainer">
 								<span style={{ border: '1px solid black', borderRadius: '10px', padding: '1rem', marginRight: '0.5rem', fontWeight: 'bold' }}>{emailCopy}</span>
-								<CopyToClipboard text={emailCopy + '  -  slbi@2020'} button-title="Copy">
-									<div style={{ padding: '1rem', cursor: 'pointer', fontWeight: 'bold' }} onClick={() => setCopy(true)}>
+								<CopyToClipboard text={emailCopy.toLowerCase() + '  -  slbi@2020'} button-title="Copy">
+									<div style={{ padding: '1rem 0', cursor: 'pointer', fontWeight: 'bold' }} onClick={() => setCopy(true)}>
 										{copy ? <i class="fas fa-clipboard-check fa-lg red-text"></i> : <i class="fas fa-clipboard fa-lg black-text"></i>}
 									</div>
 								</CopyToClipboard>

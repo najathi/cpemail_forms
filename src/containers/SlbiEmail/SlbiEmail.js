@@ -36,6 +36,9 @@ class NavbarPage extends Component {
 						<MDBNavItem>
 							<MDBNavLink to="/bulk-email/">Bulk Email</MDBNavLink>
 						</MDBNavItem>
+						{/* <MDBNavItem>
+							<MDBNavLink to="/group-email/">Group Email</MDBNavLink>
+						</MDBNavItem> */}
 					</MDBNavbarNav>
 				</MDBCollapse>
 			</MDBNavbar>

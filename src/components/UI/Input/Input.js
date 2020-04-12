@@ -51,7 +51,9 @@ const Input = props => {
 				{...props.elementConfig}
 				name={props.name}
 				value={props.value}
-				onChange={props.changed} />);
+				onChange={props.changed}
+				cols="40"
+				rows="5" />);
 			break;
 		case ('select'):
 			inputElement = (
