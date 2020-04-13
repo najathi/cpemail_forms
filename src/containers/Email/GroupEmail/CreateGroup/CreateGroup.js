@@ -4,10 +4,11 @@ import axios from '../../../../axios-emails';
 
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
-import Spinner from '../../../../components/UI/Spinner/Spinner';
-import Alert from '../../../../components/UI/Alert/Alert';
+// import Spinner from '../../../../components/UI/Spinner/Spinner';
+// import Alert from '../../../../components/UI/Alert/Alert';
+import './CreateGroup.css';
 
-const GroupEmail = props => {
+const CreateGroup = props => {
 
 	const [emailForm, setEmailForm] = useState({
 		email: {
@@ -48,14 +49,13 @@ const GroupEmail = props => {
 	});
 	const [formIsValid, setFormIsValid] = useState(false);
 	const [emails, setEmails] = useState([]);
-	const [loading, setLoading] = useState(false);
+	// const [loading, setLoading] = useState(false);
 	const [formErrors, setFormErrors] = useState({
 		email: "",
 	});
-	const [success, setSuccess] = useState(false);
-	const [danger, setDanger] = useState(false);
-	const [emailCopy, setEmailCopy] = useState('');
-	const [copy, setCopy] = useState(false);
+	// const [success, setSuccess] = useState(false);
+	// const [danger, setDanger] = useState(false);
+	const [isPreview, setIsPreview] = useState(false);
 
 	useEffect(() => {
 		const url = '/emails.php';
@@ -112,22 +112,41 @@ const GroupEmail = props => {
 		});
 	}
 
-	const emailSubmitHandler = event => {
-		event.preventDefault();
-		setLoading(true);
-		const formData = {};
-		for (let formElementIdentifier in emailForm) {
-			formData[formElementIdentifier] = emailForm[formElementIdentifier].value.trim();
-		}
+	const resetHandler = () => {
+		props.onReset();
+		resetFormInput();
 	}
 
-	const previewHandler = event => {
+	const emailSubmitHandler = event => {
+		event.preventDefault();
+		// setLoading(true);
+		const payload = {
+			email: props.email
+		}
 
+		axios.post('/create-group-emails.php', payload, {
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded'
+			}
+		})
+			.then(response => {
+				console.log(response);
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	}
+
+	const onPreviewHandler = event => {
+		if (emailForm.email.value === '') {
+			return;
+		}
+		props.preview(emailForm.email.value.split('\n').map(line => line.replace(/\s/g, '').replace(/[^a-zA-Z ]/g, "").toLowerCase().trim() + emailForm.designation.value + '@slbi.lk'));
+		setIsPreview(true);
 	}
 
 	const checkValidity = (value, rules) => {
 		let isValid = true;
-		setEmailCopy('');
 
 		const arrEmails = [...emails];
 
@@ -140,7 +159,10 @@ const GroupEmail = props => {
 		}
 
 		if (rules.filter) {
-			isValid = arrEmails.indexOf(value) === -1 && isValid;
+			value.split('\n').map(mail => {
+				isValid = arrEmails.indexOf(mail) === -1 && isValid;
+				return [];
+			});
 		}
 
 		if (rules.filter) {
@@ -156,8 +178,6 @@ const GroupEmail = props => {
 
 	const inputChangedHandler = (event, inputIdentifier) => {
 		const updatedOrderForm = { ...emailForm };
-
-		console.log(event.target);
 
 		const updatedFormElement = { ...updatedOrderForm[inputIdentifier] };
 		updatedFormElement.value = event.target.value;
@@ -176,8 +196,6 @@ const GroupEmail = props => {
 		if (formIsValid) {
 			setFormErrors({ email: '' });
 		}
-
-		console.log(emailForm);
 	}
 
 	const formElementArray = [];
@@ -190,7 +208,7 @@ const GroupEmail = props => {
 	}
 
 	let form = (
-		<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end' }}>
+		<div className="form-container">
 			<form onSubmit={emailSubmitHandler}>
 				{formElementArray.map(formElement => (
 					<Input
@@ -206,27 +224,28 @@ const GroupEmail = props => {
 						formErrors={formErrors}
 						changed={(event) => inputChangedHandler(event, formElement.id)} />
 				))}
-				<Button btnType="Default" color="indigo" disabled={!formIsValid} style={{ marginBottom: '3rem' }}>Add Email</Button>
+				<MDBBtn gradient="peach" style={{ marginRight: '1rem', borderRadius: '20px' }} onClick={onPreviewHandler}>Preview</MDBBtn>
+				{isPreview && <Button btnType="Default" disabled={!formIsValid} style={{ marginBottom: '3rem', marginRight: '1rem' }}>Submit Email</Button>}
+				{isPreview && <MDBBtn color="dark" outline style={{ marginLeft: '1rem', borderRadius: '20px' }} onClick={resetHandler}>RESET</MDBBtn>}
 			</form>
-			<MDBBtn color="warning" outline rounded style={{ marginRight: '1rem', borderRadius: '20px' }}>Preview</MDBBtn>
 		</div>);
 
-	if (loading) {
-		form = <Spinner />;
-	}
+	// if (loading) {
+	// 	form = <Spinner />;
+	// }
 
-	let alertMessage = null;
-	if (success) {
-		alertMessage = <Alert alertType="success" text="Email Account was created" />;
-	} else if (danger) {
-		alertMessage = <Alert alertType="danger" text="Unable to create email account" />;
-	}
+	// let alertMessage = null;
+	// if (success) {
+	// 	alertMessage = <Alert alertType="success" text="Email Account was created" />;
+	// } else if (danger) {
+	// 	alertMessage = <Alert alertType="danger" text="Unable to create email account" />;
+	// }
 
 	return (
 		<MDBCol lg="12">
 			<MDBCol md="6">
 				<div style={{ padding: '2rem 1rem', textAlign: 'left' }}>
-					{alertMessage}
+					{/* {alertMessage} */}
 					<h4 style={{ marginBottom: '1rem', fontWeight: 'bold' }}>Create Group Email Accounts</h4>
 					{form}
 					<MDBCol style={{ marginTop: '2rem' }}>
@@ -237,4 +256,4 @@ const GroupEmail = props => {
 	);
 }
 
-export default GroupEmail;
+export default CreateGroup;

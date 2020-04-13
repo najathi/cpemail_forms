@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { MDBCol } from 'mdbreact';
-import axios from '../../../../axios-emails';
+import axios from '../../../axios-emails';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import Input from '../../../../components/UI/Input/Input';
-import Button from '../../../../components/UI/Button/Button';
-import Spinner from '../../../../components/UI/Spinner/Spinner';
-import Alert from '../../../../components/UI/Alert/Alert';
-import Aux from '../../../../hoc/Auxiliary/Auxiliary';
+import Input from '../../../components/UI/Input/Input';
+import Button from '../../../components/UI/Button/Button';
+import Spinner from '../../../components/UI/Spinner/Spinner';
+import Alert from '../../../components/UI/Alert/Alert';
+import Aux from '../../../hoc/Auxiliary/Auxiliary';
 import './CreateEmail.css';
 
 const CreateEmail = props => {
@@ -122,6 +122,7 @@ const CreateEmail = props => {
 		for (let formElementIdentifier in emailForm) {
 			formData[formElementIdentifier] = emailForm[formElementIdentifier].value.trim();
 		}
+		console.log(formData);
 		axios.post('/create-email.php', formData, {
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 		})
@@ -258,7 +259,7 @@ const CreateEmail = props => {
 								<span style={{ border: '1px solid black', borderRadius: '10px', padding: '1rem', marginRight: '0.5rem', fontWeight: 'bold' }}>{emailCopy}</span>
 								<CopyToClipboard text={emailCopy.toLowerCase() + '  -  slbi@2020'} button-title="Copy">
 									<div style={{ padding: '1rem 0', cursor: 'pointer', fontWeight: 'bold' }} onClick={() => setCopy(true)}>
-										{copy ? <i class="fas fa-clipboard-check fa-lg red-text"></i> : <i class="fas fa-clipboard fa-lg black-text"></i>}
+										{copy ? <i className="fas fa-clipboard-check fa-lg red-text"></i> : <i className="fas fa-clipboard fa-lg black-text"></i>}
 									</div>
 								</CopyToClipboard>
 							</div>

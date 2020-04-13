@@ -3,7 +3,7 @@ import { MDBRow } from 'mdbreact';
 
 import CreateBulk from './CreateBulk/CreateBulk';
 import EmailCard from './CreateBulk/EmailCard/EmailCard';
-import './Email.css';
+import './BulkEmail.css';
 
 const Email = props => {
 

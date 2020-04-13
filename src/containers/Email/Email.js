@@ -3,7 +3,7 @@ import {
 	MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse,
 } from "mdbreact";
 
-import './SlbiEmail.css';
+import './Email.css';
 
 class NavbarPage extends Component {
 	state = {

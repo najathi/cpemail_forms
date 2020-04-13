@@ -1,13 +1,13 @@
 import React from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import './App.css';
-import SlbiEmail from './containers/SlbiEmail/SlbiEmail';
+import SlbiEmail from './containers/Email/Email';
 
-import Email from './containers/SlbiEmail/Email/Email';
-import CreateEmail from './containers/SlbiEmail/Email/CreateEmail/CreateEmail';
+import BulkEmail from './containers/Email/BulkEmail/BulkEmail';
+import CreateEmail from './containers/Email/CreateEmail/CreateEmail';
 import Docs from './components/Docs/Docs';
 import NetworkDetector from './hoc/NetworkDetector/NetworkDetector';
-import GroupEmail from './containers/SlbiEmail/Email/GroupEmail/GroupEmail';
+import GroupEmail from './containers/Email/GroupEmail/GroupEmail';
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
       <SlbiEmail />
       <Switch>
         {/* <Route path="/group-email/" component={GroupEmail} /> */}
-        <Route path="/bulk-email/" component={Email} />
+        <Route path="/bulk-email/" component={BulkEmail} />
         <Route path="/create-email/" component={CreateEmail} />
         <Route path="/" component={Docs} exact />
         <Route path='*' exact={true} render={() => <div className="NotFoundPage"><h1>Not Found</h1></div>} />
