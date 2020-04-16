@@ -132,7 +132,9 @@ const CreateEmail = props => {
 		setLoading(true);
 		const formData = {};
 		for (let formElementIdentifier in emailForm) {
-			formData[formElementIdentifier] = emailForm[formElementIdentifier].value.trim();
+			formData[formElementIdentifier] = formElementIdentifier === 'email' ?
+				emailForm[formElementIdentifier].value.replace(/\s/g, '').replace(/[^a-zA-Z ]/g, "").toLowerCase().trim() :
+				formData[formElementIdentifier] = emailForm[formElementIdentifier].value.trim();
 		}
 		console.log(formData);
 		axios.post('/create-email.php', formData, {
