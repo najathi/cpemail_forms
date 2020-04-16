@@ -65,7 +65,7 @@ const CreateBulk = props => {
 				});
 				setEmails(emails);
 			}).catch(error => console.log(error));
-	}, [emailForm]);
+	}, [emailForm.email.value, emailForm.designation.value]);
 
 	const resetFormInput = () => {
 		setEmailForm({

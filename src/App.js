@@ -7,7 +7,7 @@ import BulkEmail from './containers/Email/BulkEmail/BulkEmail';
 import CreateEmail from './containers/Email/CreateEmail/CreateEmail';
 import Docs from './components/Docs/Docs';
 import NetworkDetector from './hoc/NetworkDetector/NetworkDetector';
-import GroupEmail from './containers/Email/GroupEmail/GroupEmail';
+// import GroupEmail from './containers/Email/GroupEmail/GroupEmail';
 
 function App() {
   return (

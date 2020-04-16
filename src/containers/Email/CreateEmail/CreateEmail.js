@@ -60,6 +60,18 @@ const CreateEmail = props => {
 	const [emailCopy, setEmailCopy] = useState('');
 	const [copy, setCopy] = useState(false);
 
+	if (success) {
+		setTimeout(() => {
+			setSuccess(false);
+		}, 5000);
+	}
+
+	if (danger) {
+		setTimeout(() => {
+			setDanger(false);
+		}, 5000);
+	}
+
 	useEffect(() => {
 		const url = '/emails.php';
 		axios.get(url).then(response => response.data)
@@ -73,7 +85,7 @@ const CreateEmail = props => {
 				});
 				setEmails(emails);
 			}).catch(error => console.log(error));
-	}, [emailForm]);
+	}, [emailForm.email.value, emailForm.designation.value]);
 
 	const resetFormInput = () => {
 		setEmailForm({
@@ -133,19 +145,12 @@ const CreateEmail = props => {
 				setSuccess(true);
 				setDanger(false);
 				resetFormInput();
-				setTimeout(() => {
-					setSuccess(false);
-				}, 10000);
-				// props.history.push('/');
 			})
 			.catch(error => {
 				setLoading(false);
 				console.log(error);
 				setDanger(true);
 				setSuccess(false);
-				setTimeout(() => {
-					setDanger(false);
-				}, 10000);
 			});
 	}
 
@@ -184,8 +189,6 @@ const CreateEmail = props => {
 	const inputChangedHandler = (event, inputIdentifier) => {
 		const updatedOrderForm = { ...emailForm };
 
-		console.log(event.target);
-
 		const updatedFormElement = { ...updatedOrderForm[inputIdentifier] };
 		updatedFormElement.value = event.target.value;
 		updatedFormElement.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
@@ -204,7 +207,6 @@ const CreateEmail = props => {
 			setFormErrors({ email: '' });
 		}
 
-		console.log(emailForm);
 	}
 
 	const formElementArray = [];
